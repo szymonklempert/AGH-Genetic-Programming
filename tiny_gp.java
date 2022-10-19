@@ -236,6 +236,7 @@ public class tiny_gp {
                 fbestpop = fitness[i];
             }
         }
+        
         avg_len = (double) node_count / POPSIZE;
         favgpop /= POPSIZE;
         System.out.print("Generation="+gen+" Avg Fitness="+(-favgpop)+
