@@ -248,7 +248,6 @@ public class tiny_gp {
                 " Best Fitness=" + (-fbestpop) + " Avg Size=" + avg_len +
                 "\nBest Individual: ");
         print_indiv(pop[best], 0, best_indiv);
-        csv.writeGeneration(gen, favgpop, fbestpop, avg_len, best_indiv);
         System.out.print(best_indiv);
         System.out.print("\n\n");
         System.out.flush();
@@ -256,6 +255,7 @@ public class tiny_gp {
         System.out.print("--------simplified-------\n");
         Simplifier simplifier = new Simplifier();
         simplifier.simplify(best_indiv.toString());
+        csv.writeGeneration(gen, favgpop, fbestpop, avg_len, best_indiv, best_indiv.toString());
         System.out.print(simplifier.toString().concat("\n"));
         System.out.print("------------------------\n\n");
 

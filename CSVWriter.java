@@ -25,6 +25,8 @@ public class CSVWriter {
             line.append("Avg Size");
             line.append(',');
             line.append("Best Individual");
+            line.append(',');
+            line.append("Simplified");
             line.append('\n');
             fileWriter.write(line.toString());
 
@@ -53,7 +55,7 @@ public class CSVWriter {
         //     System.out.println(e.getMessage());
         // }
     }
-    public void writeGeneration(int gen, double favgpop, double fbestpop, double avg_len, StringBuilder best_indiv){
+    public void writeGeneration(int gen, double favgpop, double fbestpop, double avg_len, StringBuilder best_indiv, String simplified){
         File csvFile = new File(this.filename);
         try(FileWriter fileWriter = new FileWriter(csvFile, true)){
             StringBuilder line = new StringBuilder();
@@ -65,7 +67,9 @@ public class CSVWriter {
             line.append(',');
             line.append(-favgpop);
             line.append(',');
-            line.append(best_indiv);
+            line.append(best_indiv);            
+            line.append(',');
+            line.append(simplified);
             line.append('\n');
             fileWriter.write(line.toString());
 
