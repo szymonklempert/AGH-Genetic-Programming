@@ -32,7 +32,7 @@ public class tiny_gp {
             MAX_LEN = 10000,
             POPSIZE = 100000,
             DEPTH = 5,
-            GENERATIONS = 100,
+            GENERATIONS = 50,
             TSIZE = 2;
     public static final double
             PMUT_PER_NODE = 0.05,
@@ -255,7 +255,7 @@ public class tiny_gp {
         System.out.print("--------simplified-------\n");
         Simplifier simplifier = new Simplifier();
         simplifier.simplify(best_indiv.toString());
-        csv.writeGeneration(gen, favgpop, fbestpop, avg_len, best_indiv, best_indiv.toString());
+        csv.writeGeneration(gen, favgpop, fbestpop, avg_len, best_indiv, simplifier.simplify(best_indiv.toString()));
         System.out.print(simplifier.toString().concat("\n"));
         System.out.print("------------------------\n\n");
 
@@ -401,9 +401,10 @@ public class tiny_gp {
 
     public static void main(String[] args) {
         long start = System.nanoTime();
-        String fname = "case1.dat";
+        String file = "Data\\f1_3";
+        String fname = file + ".dat";
         long s = -1;
-        String filename = "case1.csv";
+        String filename = file + ".csv";
         CSVWriter csv = new CSVWriter(filename);
 
 
