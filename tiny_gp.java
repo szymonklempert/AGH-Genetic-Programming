@@ -8,7 +8,7 @@
 import java.util.*;
 import java.io.*;
 import java.text.DecimalFormat;
-
+import java.lang.Math;
 public class tiny_gp {
     double[] fitness;
     char[][] pop;
@@ -18,8 +18,10 @@ public class tiny_gp {
             SUB = 111,
             MUL = 112,
             DIV = 113,
+            SIN = 114,
+            COS = 115,
             FSET_START = ADD,
-            FSET_END = DIV;
+            FSET_END = COS;
     static double[] x = new double[FSET_START];
     static double minrandom, maxrandom;
     static char[] program;
@@ -57,6 +59,11 @@ public class tiny_gp {
                 else
                     return (num / den);
             }
+            case SIN:
+                return Math.sin(run());
+            case COS:
+                return Math.cos(run());
+            
         }
         return (0.0); // should never get here
     }
@@ -70,6 +77,8 @@ public class tiny_gp {
             case SUB:
             case MUL:
             case DIV:
+            case SIN:
+            case COS:
                 return (traverse(buffer, traverse(buffer, ++buffercount)));
         }
         return (0); // should never get here
@@ -149,6 +158,8 @@ public class tiny_gp {
                 case SUB:
                 case MUL:
                 case DIV:
+                case SIN:
+                case COS:
                     buffer[pos] = prim;
                     one_child = grow(buffer, pos + 1, max, depth - 1);
                     if (one_child < 0)
@@ -190,6 +201,16 @@ public class tiny_gp {
                 sb.append("(");
                 a1 = print_indiv(buffer, ++buffercounter, sb);
                 sb.append(" / ");
+                break;
+            case SIN:
+                sb.append("sin(");
+                a1 = print_indiv(buffer, ++buffercounter, sb);
+                sb.append(" ");
+                break;
+            case COS:
+                sb.append("cos(");
+                a1 = print_indiv(buffer, ++buffercounter, sb);
+                sb.append(" ");
                 break;
         }
         a2 = print_indiv(buffer, a1, sb);
@@ -252,12 +273,12 @@ public class tiny_gp {
         System.out.print("\n\n");
         System.out.flush();
 
-        System.out.print("--------simplified-------\n");
-        Simplifier simplifier = new Simplifier();
-        simplifier.simplify(best_indiv.toString());
-        csv.writeGeneration(gen, favgpop, fbestpop, avg_len, best_indiv, best_indiv.toString());
-        System.out.print(simplifier.toString().concat("\n"));
-        System.out.print("------------------------\n\n");
+        // System.out.print("--------simplified-------\n");
+        // Simplifier simplifier = new Simplifier();
+        // simplifier.simplify(best_indiv.toString());
+        // csv.writeGeneration(gen, favgpop, fbestpop, avg_len, best_indiv, best_indiv.toString());
+        // System.out.print(simplifier.toString().concat("\n"));
+        // System.out.print("------------------------\n\n");
 
 
 
@@ -335,6 +356,8 @@ public class tiny_gp {
                         case SUB:
                         case MUL:
                         case DIV:
+                        case SIN:
+                        case COS:
                             parentcopy[mutsite] =
                                     (char) (rd.nextInt(FSET_END - FSET_START + 1)
                                             + FSET_START);
