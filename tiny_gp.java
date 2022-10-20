@@ -401,7 +401,7 @@ public class tiny_gp {
 
     public static void main(String[] args) {
         long start = System.nanoTime();
-        String file = "Data\\f1_3";
+        String file = "Data\\f3_0";
         String fname = file + ".dat";
         long s = -1;
         String filename = file + ".csv";
